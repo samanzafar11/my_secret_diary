@@ -1110,6 +1110,26 @@ input[type="range"]::-moz-range-thumb {
   .sheet__top, .pair, .strip, .sheet__foot { padding-left: 16px; padding-right: 16px; }
 }
 
+@media (max-width: 640px) {
+  /* iOS zooms in on focus when a field is smaller than 16px. */
+  .input, .sheet__title, .write, .tool-select { font-size: 16px; }
+  .write { font-size: 1.05rem; }
+
+  /* One scrollable row beats three wrapped ones on a narrow screen. */
+  .tools {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tools::-webkit-scrollbar { display: none; }
+  .tool, .tool-select { flex: none; }
+
+  /* Tooltips would sit under a thumb, and touch has no hover anyway. */
+  .act::after { display: none; }
+  .acts { width: 100%; justify-content: flex-start; }
+}
+
 @media (max-width: 430px) {
   .pair { gap: 8px; }
   .pair__arrow { display: none; }
