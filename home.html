@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#c2185b">
+<title>My diary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+<div class="scrim" data-drawer-close></div>
+
+<div class="shell">
+
+  <aside class="aside">
+    <div class="brand">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="2.5" width="18" height="19" rx="3" fill="var(--accent)"/>
+        <rect x="3" y="2.5" width="4" height="19" rx="2" fill="var(--accent-hover)"/>
+        <path d="M11 8.5h6M11 12h6M11 15.5h4" stroke="var(--on-accent)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">My Secret Diary</span>
+    </div>
+
+    <section class="block">
+      <h2 class="block__title">Account</h2>
+      <div id="account"></div>
+    </section>
+
+    <section class="block">
+      <h2 class="block__title">Word meaning</h2>
+      <label class="sr-only" for="lookInput">Look up a word</label>
+      <input class="input" type="text" id="lookInput" placeholder="Type a word, press Enter">
+      <p class="lookup" id="lookResult" style="margin-top:8px"></p>
+    </section>
+
+    <section class="block">
+      <h2 class="block__title">Appearance</h2>
+      <div class="seg" id="toneRow" role="group" aria-label="Light or dark">
+        <button type="button" data-tone="light" aria-pressed="true">Light</button>
+        <button type="button" data-tone="dark" aria-pressed="false">Dark</button>
+      </div>
+      <div class="swatches" id="swatches" role="group" aria-label="Accent colour" style="margin-top:12px"></div>
+      <div class="slider-row">
+        <label class="sr-only" for="hueSlider">Fine-tune the colour</label>
+        <input type="range" id="hueSlider" min="0" max="360" step="1">
+      </div>
+      <span class="hint">Pick a shade, or drag the slider for anything in between.</span>
+    </section>
+
+    <section class="block">
+      <h2 class="block__title">Settings</h2>
+      <div class="stack">
+        <button class="btn btn--plain" id="btnPin">Set a PIN</button>
+        <button class="btn btn--plain" id="btnKey">Translation service</button>
+        <button class="btn btn--plain" id="btnBackup">Save a backup</button>
+        <button class="btn btn--plain" id="btnSignOut">Sign out</button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <button class="btn btn--quiet btn--sm drawer-btn" data-drawer-open>☰ Menu</button>
+
+    <header class="head">
+      <p class="eyebrow" id="today"></p>
+      <h1 id="greeting">Welcome back</h1>
+      <p class="lede" id="count"></p>
+    </header>
+
+    <div class="bar">
+      <button class="btn" id="btnNew">Write something new</button>
+      <label class="sr-only" for="search">Search everything you have written</label>
+      <input class="input" type="search" id="search" placeholder="Search everything you have written">
+    </div>
+
+    <div id="entryList" aria-live="polite"></div>
+  </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

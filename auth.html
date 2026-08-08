@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#c2185b">
+<title>Sign in · My Secret Diary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="auth">
+
+<main class="auth">
+  <div class="auth__card">
+    <div class="brand">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="2.5" width="18" height="19" rx="3" fill="var(--accent)"/>
+        <rect x="3" y="2.5" width="4" height="19" rx="2" fill="var(--accent-hover)"/>
+        <path d="M11 8.5h6M11 12h6M11 15.5h4" stroke="var(--on-accent)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">My Secret Diary</span>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-mode="signin" aria-selected="true">Sign in</button>
+      <button class="tab" role="tab" data-mode="signup" aria-selected="false">Create account</button>
+    </div>
+
+    <h1 id="authTitle">Welcome back</h1>
+    <p class="auth__lede" id="authLede">Everything you have written is waiting on every device you use.</p>
+
+    <form id="authForm" novalidate>
+      <div class="field" id="nameField" hidden>
+        <label class="field__label" for="authName">Your name</label>
+        <input class="input" type="text" id="authName" maxlength="40" autocomplete="name" placeholder="Saman">
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="authEmail">Email</label>
+        <input class="input" type="email" id="authEmail" autocomplete="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="authPassword">Password</label>
+        <input class="input" type="password" id="authPassword" autocomplete="current-password" placeholder="••••••••" required>
+        <span class="hint" id="passwordHint"></span>
+      </div>
+
+      <button class="btn btn--block btn--lg" type="submit" id="authSubmit">Sign in</button>
+    </form>
+
+    <div class="auth__links">
+      <button class="link-btn" type="button" id="btnForgot">Forgotten your password?</button>
+      <a class="link-btn" href="home.html">Use without an account</a>
+    </div>
+
+    <p class="auth__note">
+      Your writing syncs only to your own account. The database refuses to hand
+      over anyone else's pages, whatever the browser asks for.
+    </p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

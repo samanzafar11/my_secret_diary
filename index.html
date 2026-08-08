@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#c2185b">
+<meta name="description" content="A private journal that translates each sentence as you finish it. Write in the language you think in, keep the diary in the language you choose.">
+<title>My Secret Diary — write in one language, keep it in another</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="landing">
+
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="2.5" width="18" height="19" rx="3" fill="var(--accent)"/>
+        <rect x="3" y="2.5" width="4" height="19" rx="2" fill="var(--accent-hover)"/>
+        <path d="M11 8.5h6M11 12h6M11 15.5h4" stroke="var(--on-accent)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">My Secret Diary</span>
+    </div>
+    <a class="btn btn--quiet btn--sm" href="#" data-start>Open my diary</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">Private journal</p>
+        <h1>Write in the language you think in.</h1>
+        <p class="hero__lede">
+          Choose the language you write in and the language you want to keep.
+          Finish a sentence, and it changes on the page — in place, without
+          breaking your train of thought.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--lg" href="#" data-start>Start writing</a>
+          <a class="btn btn--quiet btn--lg" href="#features">See how it works</a>
+        </div>
+        <p class="hero__meta">Free to use · No installation · Works offline</p>
+      </div>
+
+      <div class="hero__art">
+        <div class="demo" aria-hidden="true">
+          <div class="demo__bar">
+            <span>Untitled</span>
+            <span class="demo__pair" id="demoPair">Roman Urdu → English</span>
+          </div>
+          <div class="demo__page" id="demoPage"></div>
+          <div class="demo__foot">
+            <span id="demoState">Saved</span>
+            <span>12 words</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="features">
+      <p class="eyebrow">What it does</p>
+      <h2>Built around one idea</h2>
+
+      <div class="grid-3">
+        <article class="feature">
+          <svg class="feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M4 7h16M4 12h10M4 17h7"/><circle cx="19" cy="17" r="3"/>
+          </svg>
+          <h3>Ending a sentence is the whole gesture</h3>
+          <p>No buttons and no second column. The sentence you just finished is
+             replaced where it sits, and the cursor stays exactly where you left it.</p>
+        </article>
+
+        <article class="feature">
+          <svg class="feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/>
+          </svg>
+          <h3>Twelve languages, set up properly</h3>
+          <p>Urdu, Punjabi, Arabic and Persian switch the page to right-to-left
+             with the right typeface and the line spacing those scripts need.</p>
+        </article>
+
+        <article class="feature">
+          <svg class="feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M3 10a9 9 0 1 1 2 6"/><path d="M3 5v5h5"/>
+          </svg>
+          <h3>Your own words are never lost</h3>
+          <p>Every change is recorded. Open the history to see what you first
+             typed, or undo the last change in a single click.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band band--sunk">
+      <p class="eyebrow">Where it lives</p>
+      <h2>Your writing stays yours</h2>
+      <div class="grid-3">
+        <article class="feature">
+          <h3>On your device by default</h3>
+          <p>Entries are stored in this browser. Without an account, nothing is
+             uploaded and nothing is sent anywhere.</p>
+        </article>
+        <article class="feature">
+          <h3>Locked if you want it locked</h3>
+          <p>Set a four-digit PIN for the whole diary, or lock individual entries.
+             The PIN is stored as a hash, never as the digits themselves.</p>
+        </article>
+        <article class="feature">
+          <h3>Synced only if you ask</h3>
+          <p>Create an account and your entries follow you between devices. The
+             database refuses to return anyone else's rows.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>My Secret Diary</span>
+    <span>Built with plain HTML, CSS and JavaScript</span>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
