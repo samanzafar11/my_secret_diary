@@ -1327,8 +1327,9 @@ function initDiary() {
   }
 
   $$('.tool[data-cmd]').forEach(button => {
-    // mousedown, not click: the selection is still alive at that point.
-    button.addEventListener('mousedown', event => {
+    // pointerdown, not click: it covers mouse and touch alike, and the
+    // selection is still alive at that point on both.
+    button.addEventListener('pointerdown', event => {
       event.preventDefault();
       COMMANDS[button.dataset.cmd]?.();
     });
@@ -1478,6 +1479,7 @@ function initDiary() {
      ------------------------------------------------------------------- */
 
   let chain = Promise.resolve();
+  let lastSource = '';
 
   function swap() {
     const selection = window.getSelection();
@@ -1493,6 +1495,8 @@ function initDiary() {
     if (!isSentence(source)) return;
     if (!getApiKey()) return;
     if (entry.from === entry.into) return;
+    if (source === lastSource) return;      // already handled this exact run
+    lastSource = source;
 
     const target = text.slice(start, caret);
     const lead = target.match(/^\s*/)[0];
@@ -1550,8 +1554,46 @@ function initDiary() {
     });
   }
 
-  write.addEventListener('keyup', e => { if (TRIGGERS.includes(e.key)) swap(); });
-  write.addEventListener('input', touch);
+  /* Phone keyboards do not report the character in keydown or keyup — Gboard
+     and the iOS keyboard send keyCode 229 / key "Unidentified" for ordinary
+     letters. The trigger is therefore read from the input event, which carries
+     the text that was actually inserted on every platform. */
+
+  function endsWithTrigger(text) {
+    return Boolean(text) && TRIGGERS.some(mark => text.endsWith(mark));
+  }
+
+  /** Fallback for the few Android paths that leave event.data null. */
+  function charBeforeCaret() {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return '';
+    const { anchorNode, anchorOffset } = selection;
+    if (anchorNode?.nodeType === 3 && anchorOffset > 0) {
+      return anchorNode.textContent[anchorOffset - 1];
+    }
+    return '';
+  }
+
+  let composing = false;
+  write.addEventListener('compositionstart', () => { composing = true; });
+  write.addEventListener('compositionend', event => {
+    composing = false;
+    if (endsWithTrigger(event.data)) swap();
+  });
+
+  write.addEventListener('input', event => {
+    touch();
+    if (composing) return;                       // wait for the IME to settle
+
+    if (event.inputType && event.inputType.startsWith('delete')) return;
+
+    // Only consult the caret when the event told us nothing. If it did report
+    // the inserted text and that text was not a trigger, nothing should fire —
+    // otherwise a full stop left over from an earlier sentence would set the
+    // swap off again on the next keystroke.
+    const inserted = event.data == null ? charBeforeCaret() : event.data;
+    if (endsWithTrigger(inserted)) swap();
+  });
   titleBox.addEventListener('input', () => { entry.title = titleBox.value.trim(); touch(); });
 
   /* ---- header actions ---- */
